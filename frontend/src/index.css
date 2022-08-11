@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&family=Roboto:wght@300;400&display=swap");
+
+.dark-blue-tint {
+	--primary-400: #0b0c27;
+	--primary-500: #191a35;
+	--primary-600: #2b2c44;
+}
+
+.dark {
+	--primary-400: #1f1f25;
+	--primary-500: #292a31;
+	--primary-600: #3c3e44;
+}
+
+.dark-contrast {
+	--primary-400: #010001;
+	--primary-500: #18191d;
+	--primary-600: #2d2f35;
+}
+
+.app {
+	background-color: var(--primary-400);
+	isolation: isolate;
+}
