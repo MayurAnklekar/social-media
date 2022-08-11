@@ -1,11 +1,13 @@
 import React from 'react'
+import Backdrop from './components/Backdrop/Backdrop'
 
 
 const App = () => {
     return (
-        <h1 className="text-4xl font-bold underline">
-          Hello world!
-        </h1>
+        <div className={"app "}>
+			<Backdrop show={true}>
+			</Backdrop>
+		</div>
       )
 }
 
