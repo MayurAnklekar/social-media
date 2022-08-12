@@ -1,0 +1,7 @@
+@media screen and (max-width: 1096px) {
+  .auth {
+    background-image: url("../../components/images/camera.jpeg");
+    display: flex;
+    flex-direction: column;
+  }
+}
