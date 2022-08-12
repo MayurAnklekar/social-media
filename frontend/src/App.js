@@ -2,10 +2,11 @@ import React,  { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { login } from "./features/userSlice.js";
 import Backdrop from "./components/Backdrop/Backdrop";
-import Auth from "./components/Auth/Auth";
+import Auth from "./pages/Auth/Auth";
 import Loading from "./components/Loading/Loading";
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import Router from "./routes";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const App = () => {
     <div className={"app dark"}>
       
       <div className="container">
-			{!id&&<Auth />}
+			{id ? <Router /> : <Auth />}
       </div>
       <Backdrop show={isLoading}>
         <Loading/>
