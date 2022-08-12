@@ -1,0 +1,22 @@
+.login,
+register {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  transition: transform 0.4s linear;
+  transform: translate(-50%, -50%);
+}
+
+.signup .login {
+  transform: translate(=50%, -50%) rotateY(180deg);
+}
+
+.signup .register {
+  transform: translate(=50%, -50%) rotateY(0deg);
+}
+
+.register {
+  transform: translate(=50%, -50%) rotateY(-180deg);
+}
