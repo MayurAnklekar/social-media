@@ -1,0 +1,7 @@
+@media screen and (max-width: 1096px) {
+  .bgm {
+    position: relative;
+    /* margin-top: 0; */
+    top: 0;
+  }
+}

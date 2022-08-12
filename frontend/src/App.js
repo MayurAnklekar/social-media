@@ -1,4 +1,4 @@
-import React,  { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { login } from "./features/userSlice.js";
 import Backdrop from "./components/Backdrop/Backdrop";
@@ -12,21 +12,17 @@ const App = () => {
   const dispatch = useDispatch();
 
   const {
-		user: { id },
-		modal: { isLoading },
-	} = useSelector(state => state);
+    user: { id },
+    modal: { isLoading },
+  } = useSelector((state) => state);
   return (
     <div className={"app dark"}>
-      
-      <div className="container">
-			{id ? <Router /> : <Auth />}
-      </div>
+      <div className="container">{id ? <Router /> : <Auth />}</div>
       <Backdrop show={isLoading}>
-        <Loading/>
-			</Backdrop>
+        <Loading />
+      </Backdrop>
     </div>
   );
 };
-
 
 export default App;
