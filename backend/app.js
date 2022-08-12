@@ -34,6 +34,16 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
+//routers
+
+const authRouter = require("./routes/auth");
+
+//middleware
+
+const authorizationMiddleware = require("./middleware/authorization");
+
+app.use("/api/v1/auth", authRouter);
+
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
