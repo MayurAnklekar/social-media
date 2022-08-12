@@ -1,8 +1,14 @@
 import React from "react";
-import Loading from '../Loading/Loading';
-import "./Backdrop.module.css";
+import { cloneElement } from "react";
+import "./Backdrop.css";
 
 const Backdrop = ({ children, show, onClose = () => {} }) => {
+
+    const newChildren = cloneElement(children, {
+		...children.props,
+		show,
+	});
+
 	const closeModal = e => {
 		const isBackdrop = e.target.firstChild?.classList?.contains("backdrop__content");
 		if (isBackdrop) onClose();
@@ -10,7 +16,7 @@ const Backdrop = ({ children, show, onClose = () => {} }) => {
 	return (
 		<div className={show ? "backdrop show" : "backdrop"} onClick={closeModal}>
 			<div className="backdrop__content gradient-border">
-                <Loading show={show}/>
+            {newChildren}
             </div>
 		</div>
 	);
