@@ -27,12 +27,12 @@ const userSlice = createSlice({
 			);
 			return { id, name, profileImage, token };
         },
-        logout: state => {
+        logout (state) {
 			Cookies.remove("user");
 			axiosConfig.interceptors.request.eject(interceptor);
 			return initialState;
 		},
-        update: (state, action) => {
+        update (state, action) {
 			const { payload } = action;
 			console.log(payload);
 			Object.keys(payload).map(key => (state[key] = payload[key]));
