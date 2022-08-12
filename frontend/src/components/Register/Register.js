@@ -61,7 +61,9 @@ function Register({ setIsRegistering }) {
           <p className="text-slate-200 flex justify-center content-center mt-4 text-lg">
             Aready have an account?{" "}
             <span
-              onClick={() => setIsRegistering(true)}
+              onClick={() => {
+                setIsRegistering(true);
+              }}
               className="hover:cursor-pointer underline"
             >
               {" "}
