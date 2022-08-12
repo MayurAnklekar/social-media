@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Login from "../Login/Login";
-import Register from "../Register/Register";
+import Login from "../../components/Login/Login";
+import Register from "../../components/Register/Register";
 
 function Auth() {
   const [isRegistering, setIsRegistering] = useState(true);

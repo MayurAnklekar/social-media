@@ -19,7 +19,6 @@ function Login({ setIsRegistering }) {
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
-        <div>helo</div>
         <div className="flex flex-col px-7 ">
           <label htmlFor="login-email" className="text-slate-200 ml-1">
             Password
