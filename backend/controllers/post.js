@@ -11,8 +11,7 @@ const createPost = async (req, res) => {
   const { caption } = req.body;
   const { id } = req.user;
   let image = req.files?.image || "";
-  if (!caption && !image)
-    throw new BadRequestError("Expected a caption or image");
+  if (!caption && !image) throw new BadRequestError("Post is empty");
   if (image) {
     const { secure_url: src, public_id } = await uploadImage(image);
     image = { src, publicID: public_id };
@@ -102,7 +101,28 @@ const likePost = async (req, res) => {
 };
 
 const updatePost = async (req, res) => {
-  res.status(StatusCodes.OK);
+  const { id: owner } = req.user;
+  const { id } = req.params;
+  const { caption } = req.body;
+
+  const post = await Post.findOne({ _id: id, createdBy: owner });
+  if (!post) throw new BadRequestError("No Authorization");
+  let image = req.files?.image || "";
+  if (!caption && !image) throw new BadRequestError("Post is empty");
+  if (image) {
+    const { secure_url: src, public_id } = await uploadImage(image);
+    image = { src, publicID: public_id };
+    if (post.image.publicID)
+      await cloudinary.uploader.destroy(post.image.publicID);
+  }
+  const newData = { caption };
+  if (image) newData.image = image;
+  const newPost = await Post.findOneAndUpdate(
+    { _id: id, createdBy: owner },
+    newData,
+    options
+  );
+  res.status(StatusCodes.OK).json({ newPost });
 };
 
 module.exports = {
