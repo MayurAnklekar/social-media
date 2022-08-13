@@ -8,8 +8,9 @@ const uploadImage = require("../utils/uploadImage");
 const options = { new: true, runValidators: true };
 
 const createPost = async (req, res) => {
-  const { caption } = req.body;
   const { id } = req.user;
+  const { caption } = req.body;
+
   let image = req.files?.image || "";
   if (!caption && !image) throw new BadRequestError("Post is empty");
   if (image) {
@@ -18,13 +19,13 @@ const createPost = async (req, res) => {
   }
   const user = await User.findById(id);
   //   console.log(req.body);
-  const post = await Post.create({
+  const newPost = await Post.create({
     caption,
     image,
     createdBy: id,
     userDetails: { name: user.name, image: user.profileImage },
   });
-  res.status(StatusCodes.CREATED).json({ post });
+  res.status(StatusCodes.CREATED).json({ newPost });
 };
 
 // const getPosts = async (req, res) => {
