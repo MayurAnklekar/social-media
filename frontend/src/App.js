@@ -7,6 +7,7 @@ import Loading from "./components/Loading/Loading";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import Router from "./routes";
+import "./app.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,10 @@ const App = () => {
   } = useSelector((state) => state);
   return (
     <div className={"app dark"}>
-      <div className="container">{id ? <Router /> : <Auth />}</div>
-      <Backdrop show={isLoading}>
+      <div className="container img">{id ? <Router /> : <Auth />}</div>
+      {/* <Backdrop show={isLoading}>
         <Loading />
-      </Backdrop>
+      </Backdrop> */}
     </div>
   );
 };
