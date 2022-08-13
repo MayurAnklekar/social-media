@@ -11,6 +11,12 @@ import Router from "./routes";
 const App = () => {
   const dispatch = useDispatch();
 
+  //login
+	useEffect(() => {
+		const user = Cookies.get("user");
+		user && dispatch(login(JSON.parse(user)));
+	}, [dispatch]);
+
   const {
     user: { id },
     modal: { isLoading },
