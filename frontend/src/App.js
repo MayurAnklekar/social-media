@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Cookies from "js-cookie";
 import { login } from "./features/userSlice.js";
 import Backdrop from "./components/Backdrop/Backdrop";
@@ -6,10 +6,18 @@ import Auth from "./pages/Auth/Auth";
 import Loading from "./components/Loading/Loading";
 //redux
 import { useDispatch, useSelector } from "react-redux";
+import { getUsers } from "./features/usersSlice.js";
 import Router from "./routes";
 
 const App = () => {
   const dispatch = useDispatch();
+
+  const {
+    user: { id },
+    modal: { isLoading },
+  } = useSelector((state) => state);
+
+
 
   //login
 	useEffect(() => {
@@ -17,10 +25,15 @@ const App = () => {
 		user && dispatch(login(JSON.parse(user)));
 	}, [dispatch]);
 
-  const {
-    user: { id },
-    modal: { isLoading },
-  } = useSelector((state) => state);
+  
+  //get users and chats and init socket
+	useEffect(() => {
+		if (id) {
+			// const query = `id=${id}`;
+			dispatch(getUsers());
+		}
+	}, [id, dispatch]);
+
   return (
     <div className={"app dark"}>
       <div className="container">{id ? <Router /> : <Auth />}</div>
