@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+	isSidebarVisible: false,
 	isLoading: false,
 };
 
@@ -11,12 +12,15 @@ const modalSlice = createSlice({
 		hideModal: state => {
 			state.visible = false;
 		},
+		toggleSidebar: (state, action) => {
+			state.isSidebarVisible = action.payload;
+		},
 		setIsLoading: (state, action) => {
 			state.isLoading = action.payload;
 		},
 	},
 });
 
-export const { hideModal, setIsLoading } = modalSlice.actions;
+export const { hideModal, toggleSidebar, setIsLoading } = modalSlice.actions;
 
 export default modalSlice.reducer;
