@@ -37,12 +37,16 @@ cloudinary.config({
 //routers
 
 const authRouter = require("./routes/auth");
+const postRouter = require("./routes/post");
 
 //middleware
 
 const authorizationMiddleware = require("./middleware/authorization");
 
+// Routes
+
 app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/posts", authorizationMiddleware, postRouter);
 
 const start = async () => {
   try {
