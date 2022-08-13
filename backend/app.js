@@ -46,7 +46,7 @@ const authorizationMiddleware = require("./middleware/authorization");
 // Routes
 
 app.use("/api/v1/auth", authRouter);
-app.use("/api/vi/posts", authorizationMiddleware, postRouter);
+app.use("/api/v1/posts", authorizationMiddleware, postRouter);
 
 const start = async () => {
   try {
