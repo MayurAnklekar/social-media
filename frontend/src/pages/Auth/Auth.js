@@ -8,7 +8,7 @@ function Auth() {
 
   return (
     <div>
-      <div className="flex lg:flex-row justify-around ">
+      <div className="flex lg:flex-row justify-center lg:justify-around">
         <img
           src={require("../../components/images/camera.jpeg")}
           alt="camera img"

@@ -1,5 +1,6 @@
 @media screen and (max-width: 1096px) {
   .img {
-    display: none;
+    /* display: none; */
+    height: 0px;
   }
 }

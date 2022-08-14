@@ -13,10 +13,10 @@ const App = () => {
   const dispatch = useDispatch();
 
   //login
-	useEffect(() => {
-		const user = Cookies.get("user");
-		user && dispatch(login(JSON.parse(user)));
-	}, [dispatch]);
+  useEffect(() => {
+    const user = Cookies.get("user");
+    user && dispatch(login(JSON.parse(user)));
+  }, [dispatch]);
 
   const {
     user: { id },
@@ -24,13 +24,13 @@ const App = () => {
   } = useSelector((state) => state);
   return (
     <div className={"app dark"}>
-      <div className="container img">{id ? <Router /> : <Auth />}</div>
+      <div className="container img">{<Router />}</div>
+      {/* <div className="container img">{id ? <Router /> : <Auth />}</div> */}
       {/* <Backdrop show={isLoading}>
         <Loading />
       </Backdrop> */}
     </div>
   );
-  
 };
 
 export default App;
