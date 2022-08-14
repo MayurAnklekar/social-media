@@ -23,7 +23,7 @@ const ProfileCard = ({ id, isOwnProfile }) => {
 
     const [isUploading, setIsUploading] = useState(false);
 
-    // const { name, email, about, dob, profileImage } = user;
+
 	// let newDate = new Date(dob);
 	// dob = `${newDate.getDate()} ${months[newDate.getMonth()]} ${newDate.getFullYear()}`;
 
