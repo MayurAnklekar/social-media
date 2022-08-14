@@ -11,7 +11,7 @@ const getMessages = async (req, res) => {
   //   console.log(chat);
   //   console.log(chat.members[0] != userId);
   if (chat.members[0] != userId && chat.members[1] != userId)
-    res.status(401).json("You are not authorized");
+    res.status(StatusCodes.UNAUTHORIZED).json("You are not authorized");
   const messages = await Message.find({ chatID: chatId });
   res.status(StatusCodes.OK).json({ messages });
 };
@@ -21,7 +21,7 @@ const deleteM = async (req, res) => {
     const messages = await Chat.deleteMany({ lastMessage: { $exists: false } });
     res.status(StatusCodes.OK).json({ messages });
   } else {
-    res.status(401).json("Sorry Not Autorized");
+    res.status(StatusCodes.UNAUTHORIZED).json("Sorry Not Autorized");
   }
   res.json({ msg: "admin delete" });
 };
