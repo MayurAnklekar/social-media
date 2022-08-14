@@ -6,7 +6,9 @@ import InfinityScroll from "../../components/InfinityScroll/InfinityScroll";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import { fetchPostsService } from "../../services/postServices";
 import { setUserPosts } from "../../features/postSlice";
+import Posts from "../../components/Post/Posts";
 import AllUsers from "../../components/Online/AllUsers";
+import "./profile.css";
 
 const Profile = () => {
     const { id } = useParams();
@@ -41,6 +43,7 @@ const Profile = () => {
 				<article className="profile__center">
 					{isOwnProfile && <CreatePost />}
 					{posts.length < 1 && <h2>No Posts</h2>}
+                    <Posts posts={posts} />
 				</article>
 			</InfinityScroll>
             <article className="profile__right gradient-border">
