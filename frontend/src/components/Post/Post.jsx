@@ -1,12 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  deletePost,
-  setEditingPost,
-  commentPost,
-  likePost,
-} from "../../features/postSlice";
+import { deletePost, commentPost, likePost } from "../../features/postSlice";
 
 function Post({ post }) {
   const dispatch = useDispatch();
@@ -57,7 +52,7 @@ function Post({ post }) {
   }
 
   return (
-    <div>
+    <div className="w-full max-h-[50em] min-w-[20em] flex flex-col">
       <header className="flex flex-row p-4">
         <Link to="">
           <p className="bg-slate-200 rounded-full h-10 w-10"></p>
@@ -68,7 +63,7 @@ function Post({ post }) {
         </div>
       </header>
       <div className="flex justify-center content-center ">
-        <div className="bg-gray-800 w-[98%]  flex">{postDetails()}</div>
+        <div className="bg-gray-800   flex">{postDetails()}</div>
       </div>
 
       <div>
