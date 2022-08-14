@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
-const InfinityScroll = () => {
-  return (
-	<div>InfinityScroll</div>
-  )
+function InfinityScroll(props) {
+  return <div>{props.children}</div>;
 }
 
-export default InfinityScroll
+export default InfinityScroll;

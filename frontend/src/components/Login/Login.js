@@ -44,8 +44,8 @@ function Login({ setIsRegistering }) {
   }
   return (
     <ReactCardFlip isFlipped={click} flipDirection="horizontal">
-      <div className="flex justify-center content-center h-full ">
-        <form className="flex flex-col h-[28em] bg-slate-700 w-[24em] rounded-md  mt-36 shadow-2xl bgm ">
+      <div className="flex justify-center content-center mt-36 backdrop-blur-lg">
+        <form className="flex flex-col h-[28em] md:bg-slate-700 w-[24em] rounded-md shadow-2xl ">
           <div className="flex flex-col p-7 mt-10">
             <label htmlFor="login-email" className="text-slate-200 ml-1">
               Email
@@ -94,8 +94,8 @@ function Login({ setIsRegistering }) {
         </form>
       </div>
 
-      <div className="flex justify-center content-center ">
-        <form className="flex flex-col h-[38em] bg-slate-700 w-[24em] rounded-md mt-20 shadow-2xl">
+      <div className="flex justify-center content-center mt-20 backdrop-blur-lg">
+        <form className="flex flex-col h-[38em] md:bg-slate-700 w-[24em] rounded-md  shadow-2xl ">
           <div className="flex flex-col p-7 mt-10">
             <label htmlFor="login-email" className="text-slate-200 ml-1">
               Email

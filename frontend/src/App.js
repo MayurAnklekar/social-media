@@ -8,6 +8,7 @@ import Loading from "./components/Loading/Loading";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "./features/usersSlice.js";
 import Router from "./routes";
+import "./app.css";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,10 +21,10 @@ const App = () => {
 
 
   //login
-	useEffect(() => {
-		const user = Cookies.get("user");
-		user && dispatch(login(JSON.parse(user)));
-	}, [dispatch]);
+  useEffect(() => {
+    const user = Cookies.get("user");
+    user && dispatch(login(JSON.parse(user)));
+  }, [dispatch]);
 
   
   //get users and chats and init socket
@@ -36,13 +37,13 @@ const App = () => {
 
   return (
     <div className={"app dark"}>
-      <div className="container">{id ? <Router /> : <Auth />}</div>
-      <Backdrop show={isLoading}>
+      <div className="container img">{<Router />}</div>
+      {/* <div className="container img">{id ? <Router /> : <Auth />}</div> */}
+      {/* <Backdrop show={isLoading}>
         <Loading />
-      </Backdrop>
+      </Backdrop> */}
     </div>
   );
-  
 };
 
 export default App;

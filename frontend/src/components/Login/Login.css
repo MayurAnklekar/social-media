@@ -1,7 +1,6 @@
 @media screen and (max-width: 1096px) {
-  .bgm {
-    position: relative;
-    /* margin-top: 0; */
-    top: 0;
+  .blur {
+    backdrop-filter: blur(10px);
+    /* -webkit-backdrop-filter: blur(10px); */
   }
 }
