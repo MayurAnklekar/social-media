@@ -3,7 +3,7 @@ import InfinityScroll from "../../components/InfinityScroll/InfinityScroll";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { fetchPostsService } from "../../services/postServices";
 import { setAllPosts } from "../../features/postSlice";
-import AllUsers from "../../components/Online/AllUsers";
+import AllUsers from "../../components/AllUsers/AllUsers";
 import Posts from "../../components/Post/Posts";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import "./home.css";
