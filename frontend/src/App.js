@@ -37,11 +37,10 @@ const App = () => {
 
   return (
     <div className={"app dark"}>
-      <div className="container img">{<Router />}</div>
-      {/* <div className="container img">{id ? <Router /> : <Auth />}</div> */}
-      {/* <Backdrop show={isLoading}>
+      <div className="container img">{id ? <Router /> : <Auth />}</div> 
+      <Backdrop show={isLoading}>
         <Loading />
-      </Backdrop> */}
+      </Backdrop>
     </div>
   );
 };

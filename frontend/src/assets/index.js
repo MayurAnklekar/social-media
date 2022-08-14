@@ -7,3 +7,5 @@ export { default as dp } from './dp.jpg';
 export { default as mailIcon } from './mail.svg';
 export { default as cakeIcon } from './cake.svg';
 export { default as cameraIcon } from './camera.svg';
+export { default as fileIcon } from './file.svg';
+export { default as sendIcon } from './plane.svg';

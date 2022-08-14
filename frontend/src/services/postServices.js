@@ -1,8 +1,10 @@
 import axiosConfig from "./axiosConfig";
 
 const createPostService = async (formData = {}) => {
+	console.log("Inside post service")
 	const headers = { "Content-Type": "multipart/form-data" };
 	const { data } = await axiosConfig.post("/posts", formData, { headers });
+	console.log("post", data)
 	return data;
 };
 
