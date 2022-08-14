@@ -1,13 +1,14 @@
 import React from "react";
 import Post from "../../components/Post/Post";
+import "./post.css";
 
 function Posts({ posts }) {
+  console.log(posts);
   return (
-    <div>
+    <div className="posts">
       {posts.map((post) => (
         <Post post={post} key={post._id} />
       ))}
-      <Post/>
     </div>
   );
 }
