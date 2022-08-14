@@ -29,9 +29,9 @@ const App = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(setPosts());
       // const query = `id=${id}`;
       dispatch(getUsers());
+      dispatch(setPosts());
     }
   }, [id, dispatch]);
 

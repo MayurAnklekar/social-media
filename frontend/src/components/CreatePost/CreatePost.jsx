@@ -45,10 +45,9 @@ const CreatePost = () => {
     e.preventDefault();
     const formData = new FormData();
     console.log(formData);
-    formData.append("caption", form.caption.trim());
     formData.append("image", form.image);
-    // console.log(formData)
-    dispatch(addPost({ formData }));
+    formData.append("caption", form.caption.trim());
+    dispatch(addPost({formData}));
     setForm(initialForm);
   };
 

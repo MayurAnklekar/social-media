@@ -16,8 +16,9 @@ const initialState = {
 export const setPosts = createAsyncThunk(
   "post/set",
   async (props, thunkAPI) => {
-    const { dispatch } = thunkAPI;
+    const { rejectWithValue, dispatch } = thunkAPI;
     const data = await fetchPostsService();
+    if (!data) return rejectWithValue();
     dispatch(postSlice.actions.setAllPosts(data));
     return;
   }
@@ -27,9 +28,11 @@ export const addPost = createAsyncThunk("post/add", async (props, thunkAPI) => {
   const { formData } = props;
   const { fulfillWithValue, dispatch } = thunkAPI;
   dispatch(showModal({}));
+  console.log("formdata showing", formData)
   const data = await createPostService(formData);
+  console.log("after some time", data)
   dispatch(showModal({ msg: "Post created" }));
-  return fulfillWithValue(data.post);
+  return fulfillWithValue(data.newPost);
 });
 
 export const deletePost = createAsyncThunk(
