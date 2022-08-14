@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+
 import { Route, Routes } from "react-router-dom";
 import Home from "../pages/Home/Home";
 import Appbar from "../components/Appbar/Appbar";

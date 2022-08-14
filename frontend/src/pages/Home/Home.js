@@ -1,16 +1,17 @@
-import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import InfinityScroll from "../../components/InfinityScroll/InfinityScroll";
-import CreatePost from "../../components/CreatePost/CreatePost";
+import ProfileCard from "../../components/ProfileCard/ProfileCard";
+import { fetchPostsService } from "../../services/postServices";
+import { setAllPosts } from "../../features/postSlice";
 import Posts from "../../components/Post/Posts";
-import { useSelector } from "react-redux";
 
 const Home = () => {
-  // const {
-  //   post: {
-  //     allPosts: { posts, page },
-  //   },
-  //   user: { id },
-  // } = useSelector((state) => state);
+  const {
+    post: {
+      allPosts: { posts, page },
+    },
+    user: { id },
+  } = useSelector((state) => state);
 
   return (
     <div className="text-white flex flex-row justify-between">
@@ -18,7 +19,7 @@ const Home = () => {
       <InfinityScroll>
         <main className="flex flex-col bg-slate-500 min-w-[20em] w-full">
           {/* <CreatePost /> */}
-          <Posts />
+          <Posts posts={posts} />
         </main>
       </InfinityScroll>
       <div className="bg-slate-400 w-[22em]"></div>
