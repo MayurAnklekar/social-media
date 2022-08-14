@@ -2,8 +2,13 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost, commentPost, likePost } from "../../features/postSlice";
+import getDateString from "../../utils/getDateString";
+import { dp, likeIcon, likeOutlined } from "../../assets";
+import Input from "../input/input";
+import "./post.css";
 
-function Post({ post }) {
+function Post({ singlepost, post }) {
+  const createdAt = getDateString(post.createdAt);
   const dispatch = useDispatch();
   const {
     user: { id },
@@ -41,46 +46,74 @@ function Post({ post }) {
     }
     return false;
   };
+
+  const getParagraphs = (text) => {
+    const paragraphArray = text.split(/[\n\r]/g);
+    return paragraphArray.map(
+      (para, i) =>
+        para && (
+          <p className="post__caption" key={i}>
+            {para}
+          </p>
+        )
+    );
+  };
+
   function postDetails() {
     return (
-      <img
-        src={require("../../components/images/camera.jpeg")}
-        alt="img"
-        className="max-h-[60vh] w-full object-contain "
-      />
+      <div>
+        {post.caption && getParagraphs(post.caption)}
+        {post.image?.src && (
+          <img src={post.image?.src} alt="post_image" className="post__image" />
+        )}
+      </div>
     );
   }
 
   return (
-    <div className="w-full max-h-[50em] min-w-[20em] flex flex-col">
-      <header className="flex flex-row p-4">
-        <Link to="">
-          <p className="bg-slate-200 rounded-full h-10 w-10"></p>
+    <article
+      className={singlepost ? "post halfborder single" : "post gradient-border"}
+    >
+      <header>
+        <Link
+          to={`/user/${post.createdBy}`}
+          className={isOnline ? "green" : ""}
+        >
+          <img
+            src={post.userDetails?.image || dp}
+            alt="profileImage"
+            className="post__dp roundimage"
+          />
         </Link>
         <div>
-          <h3 className="px-3">Name</h3>
-          <p className="px-3 text-gray-300 text-xs">08\03\2022</p>
+          <h3>{post.userDetails?.name}</h3>
+          <p>{createdAt}</p>
         </div>
+        {/* {isOwnPost && <Options options={options} />} */}
       </header>
-      <div className="flex justify-center content-center ">
-        <div className="bg-gray-800   flex">{postDetails()}</div>
+      <div className="post__details">
+        {singlepost ? (
+          postDetails()
+        ) : (
+          <Link to={`/post/${post._id}`} className="post__details">
+            {postDetails()}
+          </Link>
+        )}
       </div>
-
-      <div>
+      <div className="post__footer">
         <div className="post__reactions">
-          <img
-            src={
-              isLiked
-                ? require("../../assets/like-outlined.svg")
-                : require("../../assets/like.svg")
-            }
+          {/* <img
+            src={isLiked ? likeIcon : likeOutlined}
             alt="like"
             onClick={likeHandler}
-          />
+          /> */}
           <p>{getNumberOfLikes() || ""}</p>
         </div>
+        {singlepost || (
+          <Input placeholder={"Write a comment..."} handler={commentHandler} />
+        )}
       </div>
-    </div>
+    </article>
   );
 }
 
