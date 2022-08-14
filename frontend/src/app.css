@@ -1,0 +1,7 @@
+@media screen and (max-width: 1096px) {
+  .img {
+    background-image: url("./components//images/camera.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+}

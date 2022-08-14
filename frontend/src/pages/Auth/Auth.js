@@ -8,11 +8,11 @@ function Auth() {
 
   return (
     <div>
-      <div className="flex lg:flex-row justify-around auth">
+      <div className="flex lg:flex-row justify-center lg:justify-around">
         <img
           src={require("../../components/images/camera.jpeg")}
           alt="camera img"
-          className="object-contain h-screen rounded-tl-[400px] rounded-br-[110px] shadow-xl sm:hidden sm:object-contain lg:flex"
+          className="object-contain h-screen rounded-tl-[400px] rounded-br-[110px] shadow-xl img"
         />
 
         <Login setIsRegistering={setIsRegistering} />

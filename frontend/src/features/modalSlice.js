@@ -1,8 +1,22 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
+	visible: false,
+	isSidebarVisible: false,
 	isLoading: false,
 };
+
+
+export const showModal = createAsyncThunk("modal/show", async (props, thunkAPI) => {
+	let { msg } = props;
+	msg = msg || "Hold on I swear it won't take so long";
+	const { fulfillWithValue, dispatch } = thunkAPI;
+	setTimeout(() => {
+		dispatch(modalSlice.actions.hideModal());
+	}, 4000);
+	return fulfillWithValue({ msg, visible: true });
+});
+
 
 const modalSlice = createSlice({
 	name: "modal",
@@ -11,12 +25,21 @@ const modalSlice = createSlice({
 		hideModal: state => {
 			state.visible = false;
 		},
+		toggleSidebar: (state, action) => {
+			state.isSidebarVisible = action.payload;
+		},
 		setIsLoading: (state, action) => {
 			state.isLoading = action.payload;
 		},
 	},
+	extraReducers: {
+		[showModal.fulfilled]: (state, action) => {
+			state.msg = action.payload.msg;
+			state.visible = action.payload.visible;
+		}
+	},
 });
 
-export const { hideModal, setIsLoading } = modalSlice.actions;
+export const { hideModal, toggleSidebar, setIsLoading } = modalSlice.actions;
 
 export default modalSlice.reducer;
