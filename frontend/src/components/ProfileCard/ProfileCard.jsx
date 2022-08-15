@@ -20,14 +20,15 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
 	} = useSelector((state) => state);
 	console.log("I am all users", users);
 	const user = users.find((user) => user._id === profile_id);
-	console.log("op", user);
+	const me = users.find((user) => user._id === id);
+	console.log("op", user ," my id is", id);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const [isUploading, setIsUploading] = useState(false);
 
 
-	const [isFollowing, setIsFollowing] = useState(user.following.includes(profile_id));
+	const [isFollowing, setIsFollowing] = useState(me?.following.includes(profile_id));
 
 
 
@@ -44,8 +45,8 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
 	};
 
 	const handleFollow = async () => {
-		const data = await fetchFollowService({"id":id, "profile_id":profile_id})
 		setIsFollowing(prev=>!prev);
+		await fetchFollowService({"id":id, "profile_id":profile_id})
 	}
 
 	return (
@@ -82,12 +83,12 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
 			</article>
 			{isOwnProfile ? (
 				<div className="btn-group">
-					<button onClick={() => dispatch(logout())}>Logout</button>
+					<button className="font-semibold bg-slate-600" onClick={() => dispatch(logout())}>Logout</button>
 				</div>
 			) : (
 				<div className="btn-group">
-					<button onClick={sendMessage}>Message</button>
-					<button onClick={handleFollow}>{isFollowing?(<>Following</>):(<>Follow</>)}</button>
+					<button className="font-semibold bg-slate-600" onClick={sendMessage}>Message</button>
+					<button className={`font-semibold ${isFollowing?"bg-blue-600":"bg-slate-600"}`} onClick={handleFollow}>{isFollowing?(<>Following</>):(<>Follow</>)}</button>
 				</div>
 			)}
 		</section>
