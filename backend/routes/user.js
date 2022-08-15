@@ -9,6 +9,6 @@ const router = express.Router();
 
 router.route("/").get(getUsers).patch(updateUser);
 router.route("/dp").patch(updateDP);
-router.route("/follow/:id").get(followUser);
+router.route("/follow/:id").patch(followUser);
 
 module.exports = router;
