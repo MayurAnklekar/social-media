@@ -47,7 +47,7 @@ const Chat = () => {
 					<ChatCard chat={chat} key={chat._id} />
 				))}
 			</section>
-			<Messenger />
+			<Messenger chats={chats}/>
 		</main>
 	);
 };
