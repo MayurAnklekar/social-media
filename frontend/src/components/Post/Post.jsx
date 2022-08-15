@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePost, commentPost, likePost } from "../../features/postSlice";
 import getDateString from "../../utils/getDateString";
-import { dp, likeIcon, likeOutlined } from "../../assets";
+import { dp, like, likeIcon, likeOutlined } from "../../assets";
+
 import Input from "../input/input";
 import "./post.css";
 
@@ -102,11 +103,11 @@ function Post({ singlepost, post }) {
       </div>
       <div className="post__footer">
         <div className="post__reactions">
-          {/* <img
+          <img
             src={isLiked ? likeIcon : likeOutlined}
             alt="like"
             onClick={likeHandler}
-          /> */}
+          />
           <p>{getNumberOfLikes() || ""}</p>
         </div>
         {singlepost || (
