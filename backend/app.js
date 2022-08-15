@@ -39,6 +39,8 @@ cloudinary.config({
 const authRouter = require("./routes/auth");
 const postRouter = require("./routes/post");
 const userRouter = require("./routes/user");
+const messageRouter = require("./routes/message");
+const chatRouter = require("./routes/chat");
 
 //middleware
 
@@ -49,6 +51,8 @@ const authorizationMiddleware = require("./middleware/authorization");
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/posts", authorizationMiddleware, postRouter);
 app.use("/api/v1/users", authorizationMiddleware, userRouter);
+app.use("/api/v1/messages", authorizationMiddleware, messageRouter);
+app.use("/api/v1/chats", authorizationMiddleware, chatRouter);
 
 const start = async () => {
   try {
