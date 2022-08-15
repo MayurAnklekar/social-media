@@ -5,16 +5,16 @@ const fetchChatsService = async () => {
 	return data;
 };
 
-// const createChatService = async (formData = {}) => {
-// 	const { partnerId } = formData;
-// 	const { data } = await axiosConfig.post("/chats", { partnerId });
-// 	return data;
-// };
+const createChatService = async (formData = {}) => {
+	const { partnerId } = formData;
+	const { data } = await axiosConfig.post("/chats", { partnerId });
+	return data;
+};
 
-// const fetchMessagesService = async (formData = {}) => {
-// 	const params = extractParams(formData, "chatId");
-// 	const { data } = await axiosConfig.get("/messages", { params });
-// 	return data;
-// };
+const fetchMessagesService = async (formData = {}) => {
+	const params = {"chatId":formData.chatId};
+	const { data } = await axiosConfig.get("/messages", { params });
+	return data;
+};
 
-export { fetchChatsService };
+export { fetchChatsService, createChatService, fetchMessagesService };

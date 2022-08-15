@@ -3,6 +3,7 @@ import InfinityScroll from "../../components/InfinityScroll/InfinityScroll";
 import ProfileCard from "../../components/ProfileCard/ProfileCard";
 import { fetchPostsService } from "../../services/postServices";
 import { setAllPosts } from "../../features/postSlice";
+import AllUsers from "../../components/AllUsers/AllUsers";
 import Posts from "../../components/Post/Posts";
 import CreatePost from "../../components/CreatePost/CreatePost";
 import "./home.css";
@@ -34,7 +35,9 @@ const Home = () => {
           <Posts posts={posts} />
         </main>
       </InfinityScroll>
-      <div className="bg-slate-400 w-[22em]"></div>
+      <aside className="home__right gradient-border">
+				<AllUsers />
+			</aside>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { getUsers } from "./features/usersSlice.js";
 import Router from "./routes";
 import "./app.css";
 import { setPosts } from "./features/postSlice";
+import { io } from "socket.io-client";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -29,9 +30,9 @@ const App = () => {
 
   useEffect(() => {
     if (id) {
-      dispatch(setPosts());
       // const query = `id=${id}`;
       dispatch(getUsers());
+      dispatch(setPosts());
     }
   }, [id, dispatch]);
 
