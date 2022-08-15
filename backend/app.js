@@ -19,14 +19,14 @@ app.use(
 const xss = require("xss-clean");
 const server = require("http").createServer(app);
 const { Server } = require("socket.io");
-const io = new Server(server, { cors: { origin: clientURL } });
+const io = new Server(server, { cors: { origin: "*" } });
 const PORT = process.env.PORT || 5000;
 
 app.use(xss());
 app.use(helmet());
 app.use(express.json());
 app.use(fileUpload({ useTempFiles: true }));
-app.use(cors({ origin: clientURL }));
+app.use(cors({ origin: "*" }));
 
 cloudinary.config({
   cloud_name: process.env.CLOUD_NAME,

@@ -62,4 +62,34 @@ const updateUser = async (req, res) => {
   res.status(StatusCodes.OK).json({ user });
 };
 
-module.exports = { getUsers, updateDP, updateUser };
+const followUser = async (req, res) => {
+  const userToFollow = await User.findById(req.params.id);
+  // console.log("User to follow", userToFollow);
+  const user = await User.findById(req.user.id);
+  // console.log("User", user);
+  if (!userToFollow) {
+    return res.status(StatusCodes.UNAUTHORIZED).json("User Not found");
+  }
+  if (req.params.id.toString() == req.user.id.toString()) {
+    return res.status(StatusCodes.BAD_REQUEST).json("Cannot Follow Self");
+  }
+  if (user.following.includes(req.params.id)) {
+    user.following.splice(user.following.indexOf(req.params.id), 1);
+    userToFollow.followers.splice(
+      userToFollow.followers.indexOf(req.user.id),
+      1
+    );
+    await user.save();
+    await userToFollow.save();
+    res.status(StatusCodes.OK).json("User Unfollowed");
+  } else {
+    userToFollow.followers.push(req.user.id);
+    user.following.push(req.params.id);
+    await user.save();
+    await userToFollow.save();
+
+    res.status(StatusCodes.OK).json("User Followed");
+  }
+};
+
+module.exports = { getUsers, updateDP, updateUser, followUser };
