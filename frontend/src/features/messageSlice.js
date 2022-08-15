@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk} from '@reduxjs/toolkit';
-import { createChatService, fetchMessagesService, fetchChatsService } from "../services/messageServices";
+import { createChatService, fetchMessagesService } from "../services/messageServices";
 
 const initialState = {
 	conversationID: "",
@@ -8,16 +8,6 @@ const initialState = {
 	chats: [],
 };
 
-export const getAllChats = createAsyncThunk("message/getAllChats", async (props, thunkAPI) => {
-	const { users } = props;
-	const { getState, fulfillWithValue } = thunkAPI;
-	const { user } = getState();
-	const data = await fetchChatsService();
-	return fulfillWithValue({
-		users: users.filter(u => u._id !== user.id),
-		chats: data.chats,
-	});
-});
 
 export const createChat = createAsyncThunk("message/createChat", async(props, thunkAPI)=>{
 	const { id } = props;
@@ -51,14 +41,7 @@ const messageSlice = createSlice({
 			state.messages = [];
 		}
 
-	},
-	extraReducers: {
-		[getAllChats.fulfilled]: (state, action) => {
-			const { users, chats } = action.payload;
-			const getUserDetails = members => users.find(user => members.includes(user._id));
-			state.chats = chats.map(chat => ({ ...chat, userDetails: getUserDetails(chat.members) }));
-		}
-	},
+	}
 
 })
 
