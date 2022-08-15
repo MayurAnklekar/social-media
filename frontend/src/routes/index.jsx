@@ -5,6 +5,7 @@ import Appbar from "../components/Appbar/Appbar";
 import Profile from "../pages/Profile/Profile";
 import AllUsers from "../components/AllUsers/AllUsers";
 import Chat from "../pages/Chat/Chat";
+import SinglePost from "../pages/SinglePost/SinglePost";
 
 const Router = () => {
 	const {
@@ -22,6 +23,7 @@ const Router = () => {
 				<Route path="/" element={<Home />} />
 				<Route path="/user/:id" element={<Profile />} />
 				<Route path="/chat" element={<Chat />} />
+        <Route path="/post/:id" element={<SinglePost />} />
 			</Routes>
 		</>
 	);

@@ -61,8 +61,10 @@ export const commentPost = createAsyncThunk(
   "post/comment",
   async (props, thunkAPI) => {
     const { id, comment } = props;
-    const { dispatch } = thunkAPI;
+    const { dispatch, getState } = thunkAPI;
     const data = await commentPostService({ id, comment });
+    if (getState().post.singlePost._id === id)
+      dispatch(postSlice.actions.setSinglePost(data.post));
     dispatch(postSlice.actions.updatePosts(data.post));
   }
 );
@@ -86,6 +88,9 @@ const postSlice = createSlice({
         if (post._id === action.payload._id) return action.payload;
         return post;
       });
+    },
+    setSinglePost: (state, action) => {
+      state.singlePost = action.payload;
     },
   },
   extraReducers: {
