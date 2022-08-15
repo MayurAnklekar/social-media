@@ -54,6 +54,41 @@ app.use("/api/v1/users", authorizationMiddleware, userRouter);
 app.use("/api/v1/messages", authorizationMiddleware, messageRouter);
 app.use("/api/v1/chats", authorizationMiddleware, chatRouter);
 
+//socket io server
+
+const {
+  addUser,
+  getUserID,
+  getSocketID,
+  removeUser,
+} = require("./socket/users");
+const {
+  createMessage,
+  deleteMessages,
+  deleteChat,
+} = require("./utils/messageSocketEvents");
+
+io.on("connection", (socket) => {
+  io.emit("usersOnline", addUser(socket.handshake.query.id, socket.id));
+  socket.on("send message", async (message, to, chatId, id) => {
+    socket
+      .to(getSocketID(to))
+      .emit("receive message", message, getUserID(socket.id));
+    await createMessage({ chatId, id, message });
+  });
+  socket.on("delete chat", async (chatID, to) => {
+    socket.to(getSocketID(to)).emit("delete chat", chatID);
+    await deleteChat({ chatID });
+  });
+  socket.on("clear chat", async (chatID, to) => {
+    socket.to(getSocketID(to)).emit("clear chat", chatID);
+    await deleteMessages({ chatID });
+  });
+  socket.on("disconnect", () => {
+    io.emit("usersOnline", removeUser(socket.id));
+  });
+});
+
 const start = async () => {
   try {
     await connectDB(process.env.MONGO_URI);
