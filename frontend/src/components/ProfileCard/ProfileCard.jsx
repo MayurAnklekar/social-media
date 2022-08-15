@@ -3,12 +3,13 @@ import { dp, cakeIcon, mailIcon, cameraIcon } from "../../assets";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import "./profilecard.css";
+import { createChat } from "../../features/messageSlice";
 import { setIsLoading } from "../../features/modalSlice";
 import { logout } from "../../features/userSlice";
 
 
 const months = ["January", "February", "March", "April", "May", "June",
-  "July", "August", "September", "October", "November", "December"
+    "July", "August", "September", "October", "November", "December"
 ];
 
 const ProfileCard = ({ id, isOwnProfile }) => {
@@ -29,6 +30,11 @@ const ProfileCard = ({ id, isOwnProfile }) => {
 
     const sendMessage = async () => {
 		dispatch(setIsLoading(true));
+        dispatch(createChat({ id })).then(() => {
+			if (window.innerWidth < 801) navigate("/chat/messenger");
+			else navigate("/chat");
+			dispatch(setIsLoading(false));
+		});
 	};
 
     return (
