@@ -10,6 +10,7 @@ import { getUsers } from "./features/usersSlice.js";
 import Router from "./routes";
 import "./app.css";
 import { setPosts } from "./features/postSlice";
+import { io } from "socket.io-client";
 
 const App = () => {
   const dispatch = useDispatch();

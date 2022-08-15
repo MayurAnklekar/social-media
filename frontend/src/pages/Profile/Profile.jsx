@@ -7,7 +7,7 @@ import CreatePost from "../../components/CreatePost/CreatePost";
 import { fetchPostsService } from "../../services/postServices";
 import { setUserPosts } from "../../features/postSlice";
 import Posts from "../../components/Post/Posts";
-import AllUsers from "../../components/Online/AllUsers";
+import AllUsers from "../../components/AllUsers/AllUsers";
 import "./profile.css";
 
 const Profile = () => {
