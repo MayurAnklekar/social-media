@@ -6,7 +6,7 @@ import Auth from "./pages/Auth/Auth";
 import { setSocket } from "./features/socketSlice";
 import Loading from "./components/Loading/Loading";
 //redux
-import { addMessages, clearMessage } from "./features/messageSlice.js";
+import { addMessages } from "./features/messageSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { getUsers } from "./features/usersSlice.js";
 import Router from "./routes";

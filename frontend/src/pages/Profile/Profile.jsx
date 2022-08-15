@@ -37,7 +37,7 @@ const Profile = () => {
     return (
         <section className="profile">
             <article className="profile__left">
-                <ProfileCard id={id} isOwnProfile={isOwnProfile} />
+                <ProfileCard profile_id={id} isOwnProfile={isOwnProfile} />
             </article>
             <InfinityScroll getNextPage={getNextPage}>
 				<article className="profile__center">
