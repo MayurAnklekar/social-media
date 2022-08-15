@@ -60,6 +60,7 @@ export const commentPost = createAsyncThunk(
     const { id, comment } = props;
     const { dispatch } = thunkAPI;
     const data = await commentPostService({ id, comment });
+
     dispatch(postSlice.actions.updatePosts(data.post));
   }
 );
@@ -83,6 +84,9 @@ const postSlice = createSlice({
         if (post._id === action.payload._id) return action.payload;
         return post;
       });
+    },
+    setSinglePost: (state, action) => {
+      state.singlePost = action.payload;
     },
   },
   extraReducers: {
