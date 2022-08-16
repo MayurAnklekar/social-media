@@ -12,7 +12,10 @@ import { updateDPService } from "../../services/userServices";
 import { update } from "../../features/userSlice";
 import Compress from "compress.js";
 import { getUsers } from "../../features/usersSlice";
-import { fetchUsersService, fetchFollowService } from "../../services/userServices";
+import {
+  fetchUsersService,
+  fetchFollowService,
+} from "../../services/userServices";
 
 const months = [
   "January",
@@ -35,27 +38,26 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
-	const {
-		user: id,
-		users: { users },
-	} = useSelector((state) => state);
-	const user = users.find((user) => user._id === profile_id);
-	const me = users.find((user) => user._id === id.id);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-	const compress = new Compress();
-	console.log(me?.following.includes(profile_id), "yeh mera id hai");
-	const [isFollowing, setIsFollowing] = useState(false);
-	console.log(isFollowing, "isFollowing");
+  const {
+    user: id,
+    users: { users },
+  } = useSelector((state) => state);
+  const user = users.find((user) => user._id === profile_id);
+  const me = users.find((user) => user._id === id.id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const compress = new Compress();
+  console.log(me?.following.includes(profile_id), "yeh mera id hai");
+  const [isFollowing, setIsFollowing] = useState(false);
+  console.log(isFollowing, "isFollowing");
 
-	useEffect(()=>{
-		if(me?.following.includes(profile_id)){
-			setIsFollowing(true);
-		}
-		else{
-			setIsFollowing(false);
-		}
-	},[ me, profile_id])
+  useEffect(() => {
+    if (me?.following.includes(profile_id)) {
+      setIsFollowing(true);
+    } else {
+      setIsFollowing(false);
+    }
+  }, [me, profile_id]);
 
   // let newDate = new Date(dob);
   // dob = `${newDate.getDate()} ${months[newDate.getMonth()]} ${newDate.getFullYear()}`;
@@ -153,13 +155,13 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
         setImage(Compress.convertBase64ToFile(data[0]?.data, data[0]?.ext));
       });
   }
-	const handleFollow = async () => {
-		setIsFollowing(prev=>!prev);
-		await fetchFollowService({"id":id, "profile_id":profile_id})
-	}
+  const handleFollow = async () => {
+    setIsFollowing((prev) => !prev);
+    await fetchFollowService({ id: id, profile_id: profile_id });
+  };
 
-	return (
-		<section className="profilecard gradient-border">
+  return (
+    <section className="profilecard gradient-border">
       {/* {isOwnProfile && (
         <>
           <Backdrop show={isUploading} onClose={hideUploading}>
@@ -167,23 +169,23 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
           </Backdrop>
         </>
       )} */}
-			<header>
-				<form>
-					<img
+      <header>
+        <form>
+          <img
             // src={user?.preview || dp}
-						src={user?.profileImage || dp}
-						alt="profile_image"
-						className="profilecard__dp roundimage "
-					/>
-					{isOwnProfile && (
-						<div className="dp-upload">
-              <button onClick={buttonHandler}></button>
-							<img
-								src={cameraIcon}
-								alt="change_profile_image"
-                className="-ml-4 "
-								onClick={() => setIsUploading(true)}
-							/>
+            src={user?.profileImage || dp}
+            alt="profile_image"
+            className="profilecard__dp roundimage "
+          />
+          {isOwnProfile && (
+            <div className="dp-upload">
+              {/* <button onClick={buttonHandler}></button> */}
+              <img
+                src={cameraIcon}
+                alt="change_profile_image"
+                onClick={buttonHandler}
+              />
+
               <input
                 type="file"
                 accept="image/*"
