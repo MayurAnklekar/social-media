@@ -18,19 +18,25 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
 		user: id,
 		users: { users },
 	} = useSelector((state) => state);
-	console.log("I am all users", users);
 	const user = users.find((user) => user._id === profile_id);
-	const me = users.find((user) => user._id === id);
-	console.log("op", user ," my id is", id);
+	const me = users.find((user) => user._id === id.id);
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const [isUploading, setIsUploading] = useState(false);
 
+	console.log(me?.following.includes(profile_id), "yeh mera id hai");
+	const [isFollowing, setIsFollowing] = useState(false);
+	console.log(isFollowing, "isFollowing");
 
-	const [isFollowing, setIsFollowing] = useState(me?.following.includes(profile_id));
-
-
+	useEffect(()=>{
+		if(me?.following.includes(profile_id)){
+			setIsFollowing(true);
+		}
+		else{
+			setIsFollowing(false);
+		}
+	},[ me, profile_id])
 
 	// let newDate = new Date(dob);
 	// dob = `${newDate.getDate()} ${months[newDate.getMonth()]} ${newDate.getFullYear()}`;
