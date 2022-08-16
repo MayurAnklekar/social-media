@@ -6,6 +6,12 @@ const fetchUsersService = async (formData = {}) => {
   return data;
 };
 
+const fetchFollowService = async (formData = {}) => {
+	const { params } = { "id":formData.id };
+	const { data } = await axiosConfig.patch("/users/follow/"+formData.profile_id, { params });
+	return data;
+}
+
 const updateDPService = async (formData = {}) => {
   // console.log(formData, "formdata");
   const headers = { "Content-Type": "multipart/form-data" };
@@ -13,4 +19,4 @@ const updateDPService = async (formData = {}) => {
   return data;
 };
 
-export { fetchUsersService, updateDPService };
+export { fetchUsersService, fetchFollowService, updateDPService };
