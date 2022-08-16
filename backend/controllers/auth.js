@@ -5,11 +5,14 @@ const {
   NotFoundError,
   AuthenticationError,
 } = require("../errors");
+const validator = require("email-validator");
 
 const register = async (req, res) => {
   console.log(req.body);
   let user = await User.findOne({ email: req.body.email });
   if (user) throw new BadRequestError("User already exists");
+  if (!validator.validate(req.body.email))
+    res.status(StatusCodes.BAD_REQUEST).json("Invalid Email");
   user = await User.create({ ...req.body });
   const { _id: id, name, profileImage } = user;
   const token = user.createJWT();
@@ -29,7 +32,9 @@ const login = async (req, res) => {
   if (!user) throw new NotFoundError("User doesn't exist");
   const isPasswordCorrect = await user.comparePassword(req.body.password);
   if (!isPasswordCorrect)
-    throw new AuthenticationError("It's Ezio's password!! Enter yours");
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json("It's Ezio's password!! Enter yours");
 
   const { _id: id, name, profileImage } = user;
   const token = await user.createJWT();
