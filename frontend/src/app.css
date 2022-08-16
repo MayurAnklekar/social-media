@@ -5,3 +5,8 @@
     background-size: cover;
   }
 }
+.test {
+  background-image: url("./components//images/camera.jpeg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
