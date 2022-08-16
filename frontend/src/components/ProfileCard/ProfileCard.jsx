@@ -159,13 +159,13 @@ const ProfileCard = ({ id, isOwnProfile }) => {
           />
           {isOwnProfile && (
             <div className="dp-upload">
-              <button onClick={buttonHandler}></button>
+              {/* <button onClick={buttonHandler}></button> */}
               <img
                 src={cameraIcon}
                 alt="change_profile_image"
-                className="-ml-4 "
-                onClick={() => setIsUploading(true)}
+                onClick={buttonHandler}
               />
+
               <input
                 type="file"
                 accept="image/*"
