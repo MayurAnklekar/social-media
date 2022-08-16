@@ -193,48 +193,33 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
                 ref={fileInputRef}
                 onChange={inputHandler}
               />
-            </div>
-          )}
-        </form>
-        <h1>{user?.name || "User"}</h1>
-        <h2>{user?.about || "About"}</h2>
-      </header>
-      <article>
-        <div className="profilecard__info">
-          <img src={mailIcon} alt="mail" />
-          <h3>{user?.email}</h3>
-        </div>
-        <div className="profilecard__info">
-          <img src={cakeIcon} alt="date of birth" />
-          <h3>Date of birth</h3>
-        </div>
-      </article>
-      {isOwnProfile ? (
-        <div className="btn-group">
-          <button
-            className="font-semibold bg-slate-600"
-            onClick={() => dispatch(logout())}
-          >
-            Logout
-          </button>
-        </div>
-      ) : (
-        <div className="btn-group">
-          <button className="font-semibold bg-slate-600" onClick={sendMessage}>
-            Message
-          </button>
-          <button
-            className={`font-semibold ${
-              isFollowing ? "bg-blue-600" : "bg-slate-600"
-            }`}
-            onClick={handleFollow}
-          >
-            {isFollowing ? <>Following</> : <>Follow</>}
-          </button>
-        </div>
-      )}
-    </section>
-  );
+						</div>
+					)}
+				</form>
+				<h1>{user?.name || "User"}</h1>
+			</header>
+			<article>
+				<div className="profilecard__info">
+					<img src={mailIcon} alt="mail" />
+					<h3>{user?.email}</h3>
+				</div>
+				<div className="profilecard__info">
+					<img src={cakeIcon} alt="date of birth" />
+					<h3>Date of birth</h3>
+				</div>
+			</article>
+			{isOwnProfile ? (
+				<div className="btn-group">
+					<button className="font-semibold bg-slate-600" onClick={() => dispatch(logout())}>Logout</button>
+				</div>
+			) : (
+				<div className="btn-group">
+					<button className="font-semibold bg-slate-600" onClick={sendMessage}>Message</button>
+					<button className={`font-semibold ${isFollowing?"bg-blue-600":"bg-slate-600"}`} onClick={handleFollow}>{isFollowing?(<>Following</>):(<>Follow</>)}</button>
+				</div>
+			)}
+		</section>
+	);
 };
 
 export default ProfileCard;
