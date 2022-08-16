@@ -29,7 +29,9 @@ const login = async (req, res) => {
   if (!user) throw new NotFoundError("User doesn't exist");
   const isPasswordCorrect = await user.comparePassword(req.body.password);
   if (!isPasswordCorrect)
-    throw new AuthenticationError("It's Ezio's password!! Enter yours");
+    res
+      .status(StatusCodes.BAD_REQUEST)
+      .json("It's Ezio's password!! Enter yours");
 
   const { _id: id, name, profileImage } = user;
   const token = await user.createJWT();
