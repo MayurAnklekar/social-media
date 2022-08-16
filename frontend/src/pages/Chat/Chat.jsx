@@ -15,8 +15,10 @@ const Chat = () => {
 
 	useEffect(()=>{
 
+		
 		const fetchChats = async () => {
 			const data = await fetchChatsService();
+			console.log("chat ids", data)
 			data.chats.map(ch=>{
 				const d = ch.members.filter(_id=>_id!==id)
 				const fetchUser = async () => {

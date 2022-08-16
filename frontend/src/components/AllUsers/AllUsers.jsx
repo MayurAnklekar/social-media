@@ -16,14 +16,11 @@ const AllUsers = () => {
 	const dispatch = useDispatch();
 
 	const Following = () => {
-		console.log("Its me yaar",user?.following)
 		const followings = user?.following?.map(following=>{
 
 			const followingDetails = users.find((user) => user?._id === following);
-			console.log("ay watan",following)
 			return followingDetails;
 		})
-		console.log("followings",followings)
 		return followings?.map(user => (
 			
 			<Link to={`/user/${user?._id}`} key={user?._id} onClick={() => dispatch(toggleSidebar(false))}>
@@ -38,7 +35,6 @@ const AllUsers = () => {
 	};
 
 	const Followers = () => {
-		console.log("Its me yaar",user)
 		const followers = user?.followers?.map(follower=>{
 			const followerDetails = users.find((user) => user?._id === follower);
 			return followerDetails;
@@ -80,11 +76,11 @@ const AllUsers = () => {
 
 	return (
 		<section className="online">
-			<h2>Followers - {user?.followers.length}</h2>
+			<h2>Followers - {user?.followers?.length}</h2>
 			{Followers()}
-			<h2>Following - {user?.following.length}</h2>
+			<h2>Following - {user?.following?.length}</h2>
 			{Following()}
-			<h2>New Users - {users.length>=5?(<>5</>):(<>{users.length}</>)}</h2>
+			<h2>New Users - {users?.length>=5?(<>5</>):(<>{users?.length}</>)}</h2>
 			{NewUsers()}
 		</section>
 	);

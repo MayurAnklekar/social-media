@@ -1,6 +1,7 @@
 import axiosConfig from "./axiosConfig";
 
 const loginService = async (formData = {}) => {
+  console.log("I want to login")
   const params = { "email": formData.email, "password": formData.password };
   const { data } = await axiosConfig.post("/auth/login", params);
   return data;
