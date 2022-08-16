@@ -12,6 +12,10 @@ import { updateDPService } from "../../services/userServices";
 import { update } from "../../features/userSlice";
 import Compress from "compress.js";
 import { getUsers } from "../../features/usersSlice";
+import {
+  fetchUsersService,
+  fetchFollowService,
+} from "../../services/userServices";
 
 const months = [
   "January",
@@ -28,21 +32,32 @@ const months = [
   "December",
 ];
 
-const ProfileCard = ({ id, isOwnProfile }) => {
+const ProfileCard = ({ profile_id, isOwnProfile }) => {
   const fileInputRef = useRef();
   const [isUploading, setIsUploading] = useState(false);
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
 
   const {
+    user: id,
     users: { users },
   } = useSelector((state) => state);
-  console.log(users);
-  const user = users.find((user) => user._id === id);
-  console.log("op", user);
+  const user = users.find((user) => user._id === profile_id);
+  const me = users.find((user) => user._id === id.id);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const compress = new Compress();
+  console.log(me?.following.includes(profile_id), "yeh mera id hai");
+  const [isFollowing, setIsFollowing] = useState(false);
+  console.log(isFollowing, "isFollowing");
+
+  useEffect(() => {
+    if (me?.following.includes(profile_id)) {
+      setIsFollowing(true);
+    } else {
+      setIsFollowing(false);
+    }
+  }, [me, profile_id]);
 
   // let newDate = new Date(dob);
   // dob = `${newDate.getDate()} ${months[newDate.getMonth()]} ${newDate.getFullYear()}`;
@@ -140,6 +155,11 @@ const ProfileCard = ({ id, isOwnProfile }) => {
         setImage(Compress.convertBase64ToFile(data[0]?.data, data[0]?.ext));
       });
   }
+  const handleFollow = async () => {
+    setIsFollowing((prev) => !prev);
+    await fetchFollowService({ id: id, profile_id: profile_id });
+  };
+
   return (
     <section className="profilecard gradient-border">
       {/* {isOwnProfile && (
@@ -191,11 +211,26 @@ const ProfileCard = ({ id, isOwnProfile }) => {
       </article>
       {isOwnProfile ? (
         <div className="btn-group">
-          <button onClick={() => dispatch(logout())}>Logout</button>
+          <button
+            className="font-semibold bg-slate-600"
+            onClick={() => dispatch(logout())}
+          >
+            Logout
+          </button>
         </div>
       ) : (
         <div className="btn-group">
-          <button onClick={sendMessage}>Message</button>
+          <button className="font-semibold bg-slate-600" onClick={sendMessage}>
+            Message
+          </button>
+          <button
+            className={`font-semibold ${
+              isFollowing ? "bg-blue-600" : "bg-slate-600"
+            }`}
+            onClick={handleFollow}
+          >
+            {isFollowing ? <>Following</> : <>Follow</>}
+          </button>
         </div>
       )}
     </section>

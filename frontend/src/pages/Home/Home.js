@@ -27,7 +27,7 @@ const Home = () => {
   return (
     <div className="home">
       <div className="home__left">
-        <ProfileCard id={id} isOwnProfile />
+        <ProfileCard profile_id={id} isOwnProfile />
       </div>
       <InfinityScroll getNextPage={getNextPage}>
         <main className="home__center">

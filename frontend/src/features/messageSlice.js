@@ -37,6 +37,10 @@ const messageSlice = createSlice({
 				return { text: message.text, send: message.sender === id, createdAt: message.createdAt };
 			});
 		},
+		addMessages: (state, action) => {
+			const { text, send = false } = action.payload;
+			state.messages = [...state.messages, { text, send, createdAt: String(new Date()) }];
+		},
 		clearMessage: (state) => {
 			state.messages = [];
 		}
@@ -46,6 +50,6 @@ const messageSlice = createSlice({
 })
 
 
-export const { clearMessage, setChatID, setReceiverID, setMessages } = messageSlice.actions;
+export const { clearMessage, setChatID, setReceiverID, setMessages, addMessages } = messageSlice.actions;
 
 export default messageSlice.reducer;
