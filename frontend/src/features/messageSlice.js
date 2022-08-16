@@ -10,12 +10,12 @@ const initialState = {
 
 
 export const createChat = createAsyncThunk("message/createChat", async(props, thunkAPI)=>{
-	const { id } = props;
+	const { profile_id } = props;
 	const { getState, dispatch } = thunkAPI;
 	const { user } = getState();
-	const data = await createChatService({ partnerId: id });
+	const data = await createChatService({ partnerId: profile_id });
 	dispatch(messageSlice.actions.setChatID(data.cid));
-	dispatch(messageSlice.actions.setReceiverID(id));
+	dispatch(messageSlice.actions.setReceiverID(profile_id));
 	const _data = await fetchMessagesService({ chatId: data.cid });
 	dispatch(clearMessage());
 	dispatch(setMessages({ messages: _data.messages, id: user.id }));

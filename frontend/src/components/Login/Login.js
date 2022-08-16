@@ -19,14 +19,9 @@ function Login({ setIsRegistering }) {
   const loginHandler = async e => {
 		e.preventDefault();
 		dispatch(setIsLoading(true));
-    try{
       const data = await loginService({email, password});
-		    if (data) dispatch(login(data));
-    }catch(e){
-      console.log(e);
-    }
-		
-		dispatch(setIsLoading(false));
+		  if (data) dispatch(login(data));
+		  dispatch(setIsLoading(false));
 	};
 
   const registerHandler = async e => {
@@ -71,13 +66,13 @@ function Login({ setIsRegistering }) {
           </div>
 
           <div className="flex flex-col px-7 ">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="login-password" className="text-slate-200 ml-1">
               Password
             </label>
             <input
               type="password"
               required
-              minlength="6"
+              minLength="6"
               id="login-password"
               placeholder="A strong one please"
               value={password}
@@ -109,12 +104,12 @@ function Login({ setIsRegistering }) {
       <div className="flex justify-center content-center mt-20 backdrop-blur-lg">
         <form onSubmit={registerHandler} className="flex flex-col h-[38em] md:bg-slate-700 w-[24em] rounded-md  shadow-2xl ">
           <div className="flex flex-col p-7 mt-10">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="register-email" className="text-slate-200 ml-1">
               Email
             </label>
             <input
               type="email"
-              id="login-email"
+              id="register-email"
               placeholder="johndoe@example.com"
               className="bg-slate-500 rounded-md h-12 p-2 mt-2"
               value={form.email}
@@ -124,14 +119,14 @@ function Login({ setIsRegistering }) {
           </div>
 
           <div className="flex flex-col px-7 ">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="register-username" className="text-slate-200 ml-1">
               Username
             </label>
             <input
               type="username"
-              id="login-password"
+              id="register-username"
               placeholder="john doe"
-              minlength="2"
+              minLength="2"
               className="bg-slate-500 rounded-md h-12 p-2 "
               value={form.name}
               required
@@ -140,13 +135,12 @@ function Login({ setIsRegistering }) {
           </div>
 
           <div className="flex flex-col px-7 mt-4">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="register-dob" className="text-slate-200 ml-1">
               Date of birth
             </label>
             <input
               type="date"
-              id="dob"
-              
+              id="register-dob"
               placeholder="john doe"
               className="bg-slate-500 rounded-md h-12 p-2 my-2 text-slate-400"
               required
@@ -156,13 +150,13 @@ function Login({ setIsRegistering }) {
           </div>
 
           <div className="flex flex-col px-7 mt-4">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="register-password" className="text-slate-200 ml-1">
               Password
             </label>
             <input
               type="password"
-              id="login-password"
-              minlength="6"
+              id="register-password"
+              minLength="6"
               placeholder="A strong one please"
               className="bg-slate-500 rounded-md h-12 p-2 my-2"
               required
