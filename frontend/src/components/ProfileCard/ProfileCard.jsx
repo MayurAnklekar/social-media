@@ -195,7 +195,6 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
 					)}
 				</form>
 				<h1>{user?.name || "User"}</h1>
-				<h2>{user?.about || "About"}</h2>
 			</header>
 			<article>
 				<div className="profilecard__info">
