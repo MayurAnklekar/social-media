@@ -5,7 +5,7 @@ import { login } from "../../features/userSlice";
 import { setIsLoading } from "../../features/modalSlice";
 import { loginService } from "../../services/authServices";
 import { registerService } from "../../services/authServices";
-// import "./Login.css";
+import "./Login.css";
 
 const initialForm = { name: "", password: "", email: "", dob: "" };
 
@@ -44,12 +44,9 @@ function Login({ setIsRegistering }) {
 		
 	};
 
-
   const updateForm = (key, e) => {
-		setForm(form => ({ ...form, [key]: e.target.value }));
-	};
-
-
+    setForm((form) => ({ ...form, [key]: e.target.value }));
+  };
 
   function handleClick() {
     setClick(!click);
@@ -59,7 +56,7 @@ function Login({ setIsRegistering }) {
       <div className="flex justify-center content-center mt-36 backdrop-blur-lg">
         <form onSubmit={loginHandler} className="flex flex-col h-[28em] md:bg-slate-700 w-[24em] rounded-md shadow-2xl ">
           <div className="flex flex-col p-7 mt-10">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="login-email" className="text-slate-200 ml-1 ">
               Email
             </label>
             <input
@@ -121,8 +118,8 @@ function Login({ setIsRegistering }) {
               placeholder="johndoe@example.com"
               className="bg-slate-500 rounded-md h-12 p-2 mt-2"
               value={form.email}
-					    required
-					    onChange={e => updateForm("email", e)}
+              required
+              onChange={(e) => updateForm("email", e)}
             />
           </div>
 
@@ -137,8 +134,8 @@ function Login({ setIsRegistering }) {
               minlength="2"
               className="bg-slate-500 rounded-md h-12 p-2 "
               value={form.name}
-				      required
-				      onChange={e => updateForm("name", e)}
+              required
+              onChange={(e) => updateForm("name", e)}
             />
           </div>
 
@@ -152,7 +149,9 @@ function Login({ setIsRegistering }) {
               
               placeholder="john doe"
               className="bg-slate-500 rounded-md h-12 p-2 my-2 text-slate-400"
-              required value={form.dob} onChange={e => updateForm("dob", e)}
+              required
+              value={form.dob}
+              onChange={(e) => updateForm("dob", e)}
             />
           </div>
 
@@ -167,8 +166,8 @@ function Login({ setIsRegistering }) {
               placeholder="A strong one please"
               className="bg-slate-500 rounded-md h-12 p-2 my-2"
               required
-				      value={form.password}
-				      onChange={e => updateForm("password", e)}
+              value={form.password}
+              onChange={(e) => updateForm("password", e)}
             />
           </div>
 

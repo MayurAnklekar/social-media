@@ -47,7 +47,7 @@ const CreatePost = () => {
     console.log(formData);
     formData.append("image", form.image);
     formData.append("caption", form.caption.trim());
-    dispatch(addPost({formData}));
+    dispatch(addPost({ formData }));
     setForm(initialForm);
   };
 
@@ -70,8 +70,12 @@ const CreatePost = () => {
             </div>
           </div>
         )}
-        <div className="btns">
-          <label htmlFor="image" aria-label="select file">
+        <div className="btns ">
+          <label
+            htmlFor="image"
+            aria-label="select file"
+            className="file rounded-full"
+          >
             <div>
               <img src={fileIcon} alt="select file" />
             </div>
@@ -82,7 +86,7 @@ const CreatePost = () => {
             accept="image/png, image/jpeg"
             onChange={loadImage}
           />
-          <button type="submit" aria-label="submit">
+          <button type="submit" aria-label="submit" className="file">
             <img src={sendIcon} alt="send" />
           </button>
         </div>

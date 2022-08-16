@@ -91,7 +91,13 @@ p {
   width: 50%;
   flex-shrink: 0;
 }
-
+.lk {
+  background: linear-gradient(
+    to bottom right,
+    rgb(202, 18, 202),
+    rgb(114, 18, 166)
+  );
+}
 .post__reactions img {
   height: 23px;
   cursor: pointer;
