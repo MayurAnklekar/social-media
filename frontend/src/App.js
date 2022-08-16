@@ -38,7 +38,16 @@ const App = () => {
 
   return (
     <div className={"app dark"}>
-      <div className="container img">{id ? <Router /> : <Auth />}</div>
+      {id ? (
+        <div className="container ">
+          <Router />
+        </div>
+      ) : (
+        <div className="container img">
+          <Auth />
+        </div>
+      )}
+
       <Backdrop show={isLoading}>
         <Loading />
       </Backdrop>

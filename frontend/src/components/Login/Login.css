@@ -4,3 +4,10 @@
     /* -webkit-backdrop-filter: blur(10px); */
   }
 }
+.btn {
+  background: linear-gradient(
+    to bottom right,
+    rgb(202, 18, 202),
+    rgb(114, 18, 166)
+  );
+}

@@ -5,7 +5,7 @@ import { login } from "../../features/userSlice";
 import { setIsLoading } from "../../features/modalSlice";
 import { loginService } from "../../services/authServices";
 import { registerService } from "../../services/authServices";
-// import "./Login.css";
+import "./Login.css";
 
 const initialForm = { name: "", password: "", email: "", dob: "" };
 
@@ -16,28 +16,25 @@ function Login({ setIsRegistering }) {
   const [form, setForm] = useState(initialForm);
   const dispatch = useDispatch();
 
-  const loginHandler = async e => {
-		e.preventDefault();
-		dispatch(setIsLoading(true));
-		const data = await loginService({email, password});
-		if (data) dispatch(login(data));
-		dispatch(setIsLoading(false));
-	};
+  const loginHandler = async (e) => {
+    e.preventDefault();
+    dispatch(setIsLoading(true));
+    const data = await loginService({ email, password });
+    if (data) dispatch(login(data));
+    dispatch(setIsLoading(false));
+  };
 
-  const registerHandler = async e => {
-		e.preventDefault();
-		dispatch(setIsLoading(true));
-		const data = await registerService(form);
-		if (data) dispatch(login(data));
-		dispatch(setIsLoading(false));
-	};
-
+  const registerHandler = async (e) => {
+    e.preventDefault();
+    dispatch(setIsLoading(true));
+    const data = await registerService(form);
+    if (data) dispatch(login(data));
+    dispatch(setIsLoading(false));
+  };
 
   const updateForm = (key, e) => {
-		setForm(form => ({ ...form, [key]: e.target.value }));
-	};
-
-
+    setForm((form) => ({ ...form, [key]: e.target.value }));
+  };
 
   function handleClick() {
     setClick(!click);
@@ -47,7 +44,7 @@ function Login({ setIsRegistering }) {
       <div className="flex justify-center content-center mt-36 backdrop-blur-lg">
         <form className="flex flex-col h-[28em] md:bg-slate-700 w-[24em] rounded-md shadow-2xl ">
           <div className="flex flex-col p-7 mt-10">
-            <label htmlFor="login-email" className="text-slate-200 ml-1">
+            <label htmlFor="login-email" className="text-slate-200 ml-1 ">
               Email
             </label>
             <input
@@ -75,7 +72,10 @@ function Login({ setIsRegistering }) {
           </div>
 
           <div className="flex flex-col px-7 mt-7">
-            <button onClick={loginHandler} className="flex justify-center content-center bg-slate-800 h-12 text-slate-200 rounded-md pt-2 text-xl">
+            <button
+              onClick={loginHandler}
+              className="flex justify-center content-center bg-slate-800 h-12 text-slate-200 rounded-md pt-2 text-xl"
+            >
               Login
             </button>
             <p className="text-slate-200 flex justify-center content-center mt-4 text-lg">
@@ -106,8 +106,8 @@ function Login({ setIsRegistering }) {
               placeholder="johndoe@example.com"
               className="bg-slate-500 rounded-md h-12 p-2 mt-2"
               value={form.email}
-					    required
-					    onChange={e => updateForm("email", e)}
+              required
+              onChange={(e) => updateForm("email", e)}
             />
           </div>
 
@@ -121,8 +121,8 @@ function Login({ setIsRegistering }) {
               placeholder="john doe"
               className="bg-slate-500 rounded-md h-12 p-2 "
               value={form.name}
-				      required
-				      onChange={e => updateForm("name", e)}
+              required
+              onChange={(e) => updateForm("name", e)}
             />
           </div>
 
@@ -135,7 +135,9 @@ function Login({ setIsRegistering }) {
               id="dob"
               placeholder="john doe"
               className="bg-slate-500 rounded-md h-12 p-2 my-2 text-slate-400"
-              required value={form.dob} onChange={e => updateForm("dob", e)}
+              required
+              value={form.dob}
+              onChange={(e) => updateForm("dob", e)}
             />
           </div>
 
@@ -149,13 +151,16 @@ function Login({ setIsRegistering }) {
               placeholder="A strong one please"
               className="bg-slate-500 rounded-md h-12 p-2 my-2"
               required
-				      value={form.password}
-				      onChange={e => updateForm("password", e)}
+              value={form.password}
+              onChange={(e) => updateForm("password", e)}
             />
           </div>
 
           <div className="flex flex-col px-7 mt-3">
-            <button onClick={registerHandler} className="flex justify-center content-center bg-slate-800 h-12 text-slate-200 rounded-md pt-2 text-xl">
+            <button
+              onClick={registerHandler}
+              className="flex justify-center content-center bg-slate-800 h-12 text-slate-200 rounded-md pt-2 text-xl"
+            >
               Register
             </button>
             <p className="text-slate-200 flex justify-center content-center mt-4 text-lg">
