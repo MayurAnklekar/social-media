@@ -28,7 +28,7 @@
 
 .profilecard__dp {
   height: 10em;
-  margin-left: 3.5em;
+
   border: 0.3rem solid var(--primary-400);
   box-shadow: 2px 20px 45px #161616;
 }
