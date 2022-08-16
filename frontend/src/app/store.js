@@ -14,5 +14,6 @@ export const store = configureStore({
         message: messageReducer,
         post: postReducer,
         socket: socketReducer,
-    }
+    },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck: false}),
 });

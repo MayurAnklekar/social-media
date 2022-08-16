@@ -6,5 +6,11 @@ const fetchUsersService = async (formData = {}) => {
 	return data;
 };
 
+const fetchFollowService = async (formData = {}) => {
+	const { params } = { "id":formData.id };
+	const { data } = await axiosConfig.patch("/users/follow/"+formData.profile_id, { params });
+	return data;
+}
 
-export { fetchUsersService };
+
+export { fetchUsersService, fetchFollowService };
