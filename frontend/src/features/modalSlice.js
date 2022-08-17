@@ -1,20 +1,23 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 const initialState = {
+	type: "",
+	msg: "",
 	visible: false,
 	isSidebarVisible: false,
 	isLoading: false,
 };
 
 
-export const showModal = createAsyncThunk("modal/show", async (props, thunkAPI) => {
-	let { msg } = props;
+export const showAlert = createAsyncThunk("modal/show", async (props, thunkAPI) => {
+	let { msg, type } = props;
 	msg = msg || "Hold on I swear it won't take so long";
+	type = type || "info";
 	const { fulfillWithValue, dispatch } = thunkAPI;
-	setTimeout(() => {
-		dispatch(modalSlice.actions.hideModal());
-	}, 4000);
-	return fulfillWithValue({ msg, visible: true });
+	// setTimeout(() => {
+	// 	dispatch(modalSlice.actions.hideModal());
+	// }, 4000);
+	return fulfillWithValue({ msg, visible: true, type  });
 });
 
 
@@ -22,7 +25,7 @@ const modalSlice = createSlice({
 	name: "modal",
 	initialState,
 	reducers: {
-		hideModal: state => {
+		hideAlert: state => {
 			state.visible = false;
 		},
 		toggleSidebar: (state, action) => {
@@ -33,13 +36,14 @@ const modalSlice = createSlice({
 		},
 	},
 	extraReducers: {
-		[showModal.fulfilled]: (state, action) => {
+		[showAlert.fulfilled]: (state, action) => {
 			state.msg = action.payload.msg;
 			state.visible = action.payload.visible;
+			state.type = action.payload.type;
 		}
 	},
 });
 
-export const { hideModal, toggleSidebar, setIsLoading } = modalSlice.actions;
+export const { hideAlert, toggleSidebar, setIsLoading } = modalSlice.actions;
 
 export default modalSlice.reducer;

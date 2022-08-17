@@ -3,6 +3,7 @@ import ReactCardFlip from "react-card-flip";
 import { useDispatch } from "react-redux";
 import { login } from "../../features/userSlice";
 import { setIsLoading } from "../../features/modalSlice";
+import {showAlert} from "../../features/modalSlice";
 import { loginService } from "../../services/authServices";
 import { registerService } from "../../services/authServices";
 import "./Login.css";
@@ -19,8 +20,13 @@ function Login({ setIsRegistering }) {
   const loginHandler = async e => {
 		e.preventDefault();
 		dispatch(setIsLoading(true));
+    try{
       const data = await loginService({email, password});
 		  if (data) dispatch(login(data));
+    }catch(error){
+      dispatch(showAlert({"msg":error.response.data, "type":"error"}));
+    }
+      
 		  dispatch(setIsLoading(false));
 	};
 
@@ -30,13 +36,10 @@ function Login({ setIsRegistering }) {
     try{
       const data = await registerService(form);
 		  if (data) dispatch(login(data));
-    }catch(e){
-      console.log(e.message);
-
+    }catch(error){
+      dispatch(showAlert({"msg":error.response.data, "type":"error"}));
     }
     dispatch(setIsLoading(false));
-		
-		
 	};
 
   const updateForm = (key, e) => {
