@@ -6,7 +6,7 @@ import {
   likePostService,
   commentPostService,
 } from "../services/postServices";
-import { showModal } from "./modalSlice";
+import { showAlert } from "./modalSlice";
 const initialState = {
   allPosts: { posts: [], page: 0 },
   userPosts: { posts: [], page: 0 },
@@ -27,11 +27,10 @@ export const setPosts = createAsyncThunk(
 export const addPost = createAsyncThunk("post/add", async (props, thunkAPI) => {
   const { formData } = props;
   const { fulfillWithValue, dispatch } = thunkAPI;
-  dispatch(showModal({}));
+  dispatch(showAlert({}));
   console.log("formdata showing", formData)
   const data = await createPostService(formData);
-  console.log("after some time", data)
-  dispatch(showModal({ msg: "Post created" }));
+  dispatch(showAlert({ msg: "Post created", type:"success" }));
   return fulfillWithValue(data.newPost);
 });
 
@@ -40,9 +39,7 @@ export const deletePost = createAsyncThunk(
   async (props, thunkAPI) => {
     const { id } = props;
     const { dispatch, fulfillWithValue } = thunkAPI;
-    dispatch(showModal({}));
     await deletePostService({ id });
-    dispatch(showModal({ msg: "Post Deleted" }));
     return fulfillWithValue(id);
   }
 );

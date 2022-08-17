@@ -10,6 +10,7 @@
   opacity: 98%;
   backdrop-filter: blur(13px);
   -webkit-backdrop-filter: blur(13x);
+  z-index: 5;
 }
 
 .appbar form {
