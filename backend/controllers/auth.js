@@ -28,13 +28,14 @@ const login = async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password)
     throw new BadRequestError("Please provide email and password");
-  console.log("password", req.body.password);
-  console.log("email", req.body.email);
+  // console.log("password", req.body.password);
+  // console.log("email", req.body.email);
   const user = await User.findOne({ email: req.body.email });
-  if (!user) res.status(StatusCodes.BAD_REQUEST).json("User does not exist");
+  if (!user)
+    return res.status(StatusCodes.BAD_REQUEST).json("User does not exist");
   const isPasswordCorrect = await user.comparePassword(req.body.password);
   if (!isPasswordCorrect)
-    res
+    return res
       .status(StatusCodes.UNAUTHORIZED)
       .json("It's Ezio's password!! Enter yours");
 
