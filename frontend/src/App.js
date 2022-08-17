@@ -14,6 +14,7 @@ import "./app.css";
 import SERVER_URI from "./serverUri";
 import { setPosts } from "./features/postSlice";
 import { io } from "socket.io-client";
+import Alerts from "./components/Alert/Alert.jsx";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -62,7 +63,7 @@ const App = () => {
           <Auth />
         </div>
       )}
-
+      <Alerts/>
       <Backdrop show={isLoading}>
         <Loading />
       </Backdrop>

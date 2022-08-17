@@ -48,6 +48,8 @@
 .messenger h4 {
 	text-align: center;
 	margin-block: 1rem;
+	display:flex;
+	gap: 1rem;
 }
 
 .messenger {
@@ -65,11 +67,12 @@
 
 .chat__sent,
 .chat__recieve {
+	
 	display: flex;
 	align-items: flex-start;
-	gap: 0.5rem;
+	gap: 10rem;
 	text-align: left;
-	margin-bottom: 0.2rem;
+	margin-bottom: 1.5rem;
 	position: relative;
 }
 
@@ -88,4 +91,15 @@
 	letter-spacing: 0.05em;
 	position: relative;
 	word-wrap: break-word;
+}
+
+.time {
+	position: absolute;
+	font-size: 0.6rem;
+	right: 0.5em;
+	bottom: -2em;
+}
+
+.chat__recieve .time {
+	left: 0.5em;
 }

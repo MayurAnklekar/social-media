@@ -59,8 +59,20 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
     }
   }, [me, profile_id]);
 
-  // let newDate = new Date(dob);
-  // dob = `${newDate.getDate()} ${months[newDate.getMonth()]} ${newDate.getFullYear()}`;
+
+  const [dob, setDob] = useState('')
+
+
+  useEffect(() => {
+    if(user)
+    {
+      let newDate = new Date(user?.dob);
+      setDob(`${newDate.getDate()} ${months[newDate.getMonth()]} ${newDate.getFullYear()}`);
+    }
+
+  },[users, user])
+
+  
 
   const sendMessage = async () => {
     dispatch(setIsLoading(true));
@@ -172,7 +184,7 @@ const ProfileCard = ({ profile_id, isOwnProfile }) => {
         </div>
         <div className="profilecard__info">
           <img src={cakeIcon} alt="date of birth" />
-          <h3>Date of birth</h3>
+          <h3>{dob}</h3>
         </div>
       </article>
       {isOwnProfile ? (
