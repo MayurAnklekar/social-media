@@ -14,6 +14,7 @@ import "./app.css";
 import SERVER_URI from "./serverUri";
 import { setPosts } from "./features/postSlice";
 import { io } from "socket.io-client";
+import { addOnline } from "./features/usersSlice.js";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -42,14 +43,21 @@ const App = () => {
     }
   }, [id, dispatch]);
 
+  useEffect(() => {
+    if (socket) {
+      socket
+        .off("receive message")
+        .on("receive message", (message, senderID) => {
+          senderID === to && dispatch(addMessages({ text: message }));
+        });
+    }
+  }, [dispatch, socket, to, conversationID]);
 
   useEffect(() => {
-		if (socket) {
-			socket.off("receive message").on("receive message", (message, senderID) => {
-				senderID === to && dispatch(addMessages({ text: message }));
-			});
-		}
-	}, [dispatch, socket, to, conversationID]);
+    if (socket) {
+      socket.on("usersOnline", (users) => dispatch(addOnline(users)));
+    }
+  }, [socket, dispatch]);
 
   return (
     <div className={"app dark"}>
