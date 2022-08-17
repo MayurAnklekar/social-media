@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef, useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { sendIcon } from "../../assets";
 import { addMessages, clearMessage } from "../../features/messageSlice";
@@ -13,7 +13,15 @@ const Messenger = ({chats}) => {
 		socket: { socket },
 	} = useSelector(state => state);
 
+	const scroll = useRef();
+
+	useEffect(() => {
+		if (scroll.current) scroll.current.scrollTop = scroll.current.scrollHeight;
+	}, [messages]);
+
+	
 	const [value, setValue] = useState("");
+	
 
 	const dispatch = useDispatch();
 
@@ -27,7 +35,12 @@ const Messenger = ({chats}) => {
 		setValue("");
 	};
 
-	console.log("Iam message", messages)
+	const getTime = (message) => {
+		const createdAt = new Date(message.createdAt);
+		return `${createdAt.getHours()}:${
+			createdAt.getMinutes() > 9 ? createdAt.getMinutes() : "0" + createdAt.getMinutes()
+		}`;
+	};
 
 	return (
 		<section className="chat__page__messenger">
@@ -39,12 +52,14 @@ const Messenger = ({chats}) => {
 							<h3>{userDetails?.name}</h3>
 						</div>
 					</header>
-					<main>
+					<main ref={scroll}>
 						<div className="messenger">
 							{messages.map((message, i)=>{
 								return (
 									<div key={i} className={message.send ? "chat__sent" : "chat__recieve"}>
-										<p className="message">{message.text}</p>
+										<p className="message">{message.text}
+										<span className="time">{getTime(message)}</span>
+										</p>
 									</div>
 								)
 							})}
